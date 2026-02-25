@@ -235,7 +235,7 @@ const AppsPage = () => {
               viewport={{ once: true, margin: "-40px" }}
               variants={fadeUp}
             >
-               <Card className="group h-full bg-card/60 backdrop-blur-sm border-border/40 transition-all duration-300 hover:bg-card/80 hover:shadow-md hover:-translate-y-0.5">
+               <Card className="group h-full bg-tht-charcoal/60 backdrop-blur-sm border-border/40 transition-all duration-300 hover:bg-tht-charcoal/80 hover:shadow-md hover:-translate-y-0.5">
                  <CardContent className="flex gap-4 p-5">
                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 transition-colors duration-300 group-hover:bg-primary/20">
                      <f.icon className="h-4.5 w-4.5 text-primary transition-transform duration-300 group-hover:scale-110" />
