@@ -1386,7 +1386,7 @@ export default function MarketIntelligencePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-sgs-dark py-20 text-center">
+      <section className="relative overflow-hidden bg-tht-dark py-20 text-center">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-3xl px-6">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
