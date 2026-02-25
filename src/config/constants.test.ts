@@ -19,8 +19,8 @@ describe("getAppUrl", () => {
     expect(getAppUrl("portal")).toBe("https://custom.lovable.app");
   });
 
-  it("returns lovable.app default when no override", () => {
-    expect(getAppUrl("portal")).toBe("https://tht-carlos.lovable.app");
+  it("returns dnaventures.es default when no override", () => {
+    expect(getAppUrl("portal")).toBe("https://sgs-carlos.dnaventures.es");
   });
 
   it("accepts override from trusted .lovable.dev domain", () => {
@@ -29,8 +29,8 @@ describe("getAppUrl", () => {
   });
 
   it("accepts override from trusted .dnaventures.es domain", () => {
-    localStorage.setItem(STORAGE_KEYS.appUrls, JSON.stringify({ portal: "https://tht-carlos.dnaventures.es" }));
-    expect(getAppUrl("portal")).toBe("https://tht-carlos.dnaventures.es");
+    localStorage.setItem(STORAGE_KEYS.appUrls, JSON.stringify({ portal: "https://sgs-carlos.dnaventures.es" }));
+    expect(getAppUrl("portal")).toBe("https://sgs-carlos.dnaventures.es");
   });
 
   it("rejects override from untrusted domain", () => {
