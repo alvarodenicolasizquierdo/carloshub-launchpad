@@ -52,19 +52,24 @@ const ComparePage = () => {
   const totalFeatures = FEATURES.length;
 
   return (
-    <div className="px-4 py-12 sm:px-6 lg:px-10 max-w-7xl mx-auto space-y-10">
+    <div className="min-h-screen">
       {/* Hero */}
-      <header className="text-center space-y-3">
-        <Badge variant="secondary" className="text-xs tracking-wide uppercase">
-          Competitive Analysis
-        </Badge>
-        <h1 className="text-4xl sm:text-5xl font-display font-bold tracking-tight">
-          How <span className="text-primary">CARLOS</span> measures up
-        </h1>
-        <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-          See exactly where CARLOS leads against the most-compared alternatives in quality &amp; compliance software.
-        </p>
-      </header>
+      <section className="relative overflow-hidden bg-tht-dark py-16 text-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
+        <div className="relative mx-auto max-w-3xl px-6">
+          <Badge variant="secondary" className="text-xs tracking-wide uppercase mb-4">
+            Competitive Analysis
+          </Badge>
+          <h1 className="text-4xl sm:text-5xl font-display font-bold tracking-tight text-primary-foreground">
+            How <span className="text-primary">CARLOS</span> measures up
+          </h1>
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg mt-4">
+            See exactly where CARLOS leads against the most-compared alternatives in quality &amp; compliance software.
+          </p>
+        </div>
+      </section>
+
+      <div className="px-4 py-12 sm:px-6 lg:px-10 max-w-7xl mx-auto space-y-10">
 
       {/* Category tabs */}
       <div className="flex justify-center">
@@ -260,6 +265,7 @@ const ComparePage = () => {
             </CardContent>
           </Card>
         ))}
+      </div>
       </div>
     </div>
   );
