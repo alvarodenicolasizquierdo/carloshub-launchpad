@@ -56,11 +56,21 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12 space-y-8">
-      <div>
-        <h1 className="font-display text-3xl font-bold">Settings</h1>
-        <p className="mt-1 text-muted-foreground">Configure audience details and custom app URLs.</p>
-      </div>
+    <div className="min-h-screen">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-tht-dark py-16 text-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
+        <div className="relative mx-auto max-w-3xl px-6">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-primary-foreground md:text-5xl">
+            Settings
+          </h1>
+          <p className="mt-4 text-muted-foreground">
+            Configure audience details and custom app URLs.
+          </p>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-3xl px-6 py-12 space-y-8">
 
       <Card>
         <CardHeader>
@@ -128,6 +138,7 @@ const SettingsPage = () => {
           <Save className="h-4 w-4" />
           Save Settings
         </Button>
+      </div>
       </div>
     </div>
   );

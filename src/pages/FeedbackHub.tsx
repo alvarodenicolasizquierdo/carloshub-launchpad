@@ -15,15 +15,15 @@ const FeedbackHub = () => {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative overflow-hidden bg-tht-dark py-16 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F47920]/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-3xl px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-[#F47920]/15"
+            className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/15"
           >
-            <Lightbulb className="h-7 w-7 text-[#F47920]" />
+            <Lightbulb className="h-7 w-7 text-primary" />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 16 }}

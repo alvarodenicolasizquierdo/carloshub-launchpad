@@ -190,19 +190,19 @@ export default function WhatsNewPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero — clean, Notion-inspired */}
-      <section className="relative overflow-hidden border-b border-border/20 py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-transparent to-transparent" />
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-tht-dark py-20 text-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-3xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="font-display text-5xl font-bold tracking-tight text-foreground md:text-6xl">
+            <h1 className="font-display text-4xl font-bold tracking-tight text-primary-foreground md:text-5xl">
               What's New
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground max-w-lg">
+            <p className="mt-4 text-lg text-muted-foreground max-w-lg mx-auto">
               Latest features, enhancements, and updates to the CARLOS platform.
             </p>
           </motion.div>
