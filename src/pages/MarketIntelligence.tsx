@@ -1237,6 +1237,254 @@ function CompanyDatabaseTab() {
   );
 }
 
+/* ─── Market Analysis Tab ─── */
+
+function MarketAnalysisTab() {
+  const orchestrators = TIC_COMPANIES.filter(c => c.quadrant === 'orchestrator');
+  const dataEngines = TIC_COMPANIES.filter(c => c.quadrant === 'data-engine');
+  const nicheExperts = TIC_COMPANIES.filter(c => c.quadrant === 'niche-expert');
+  const structuralThreats = TIC_COMPANIES.filter(c => c.threatLevel === 'structural');
+  const hybridThreats = TIC_COMPANIES.filter(c => c.threatLevel === 'hybrid');
+  const networkThreats = TIC_COMPANIES.filter(c => c.threatLevel === 'network');
+  const tacticalThreats = TIC_COMPANIES.filter(c => c.threatLevel === 'tactical');
+  const totalFunding = TIC_COMPANIES.reduce((sum, c) => sum + c.fundingAmount, 0);
+  const totalHeadcount = TIC_COMPANIES.reduce((sum, c) => sum + c.headcountNumber, 0);
+
+  return (
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+      <h2 className="font-display text-2xl font-bold text-foreground text-center mb-2">Market Analysis</h2>
+      <p className="text-sm text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
+        Strategic insights, funding landscape, and competitive positioning in the TIC sector
+      </p>
+
+      <div className="space-y-8 max-w-5xl mx-auto">
+        {/* Key Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Card className="border-border/40">
+            <CardContent className="p-5 text-center">
+              <p className="text-2xl font-display font-bold text-primary">${totalFunding.toFixed(0)}M</p>
+              <p className="text-xs text-muted-foreground mt-1">Total Funding</p>
+            </CardContent>
+          </Card>
+          <Card className="border-border/40">
+            <CardContent className="p-5 text-center">
+              <p className="text-2xl font-display font-bold text-primary">{totalHeadcount.toLocaleString()}</p>
+              <p className="text-xs text-muted-foreground mt-1">Total Headcount</p>
+            </CardContent>
+          </Card>
+          <Card className="border-border/40">
+            <CardContent className="p-5 text-center">
+              <p className="text-2xl font-display font-bold text-primary">{TIC_COMPANIES.filter(c => c.valuation?.includes('Billion')).length}</p>
+              <p className="text-xs text-muted-foreground mt-1">Unicorns ($1B+)</p>
+            </CardContent>
+          </Card>
+          <Card className="border-border/40">
+            <CardContent className="p-5 text-center">
+              <p className="text-2xl font-display font-bold text-primary">~29%</p>
+              <p className="text-xs text-muted-foreground mt-1">Digital CAGR</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Executive Summary */}
+        <Card className="border-border/60">
+          <CardContent className="p-6">
+            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <Info className="h-5 w-5 text-primary" />
+              Executive Summary
+            </h3>
+            <div className="space-y-3 text-sm text-foreground/80 leading-relaxed">
+              <p>
+                The TIC industry is undergoing a structural transformation from manual, periodic audits to continuous, AI-driven assurance.
+                While the traditional market grows at 3-5% CAGR, the digital-native platform segment is expanding at over 20% annually.
+              </p>
+              <p>
+                Our analysis reveals a market that is both more heavily capitalized and more concentrated than initially understood,
+                with significant funding discrepancies and critical omissions in standard market scans.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Funding Comparison Chart */}
+        <Card className="border-border/60">
+          <CardContent className="p-6">
+            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <DollarSign className="h-5 w-5 text-primary" />
+              Funding Landscape
+            </h3>
+            <img
+              src="/charts/funding_comparison.png"
+              alt="TIC-Tech Funding: Gemini Claims vs Verified"
+              className="w-full rounded-lg border border-border/30 mb-4"
+              loading="lazy"
+            />
+            <p className="text-xs text-muted-foreground mb-3">
+              Source: Crunchbase, CB Insights, PitchBook, press releases | Feb 2026
+            </p>
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              Forensic analysis reveals material discrepancies between initial claims and verified funding data.
+              Altana AI's verified funding is nearly double what was initially reported, placing it in a different strategic weight class.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* VC Funding Trajectory */}
+        <Card className="border-border/60">
+          <CardContent className="p-6">
+            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <ArrowUpDown className="h-5 w-5 text-primary" />
+              Venture Capital Trajectory
+            </h3>
+            <img
+              src="/charts/tic_funding_trajectory.png"
+              alt="Supply Chain / TIC Tech VC Funding (2021-2025)"
+              className="w-full rounded-lg border border-border/30 mb-4"
+              loading="lazy"
+            />
+            <p className="text-xs text-muted-foreground mb-3">
+              Source: PitchBook, MicroVentures | 2025 projected from Q3 run-rate
+            </p>
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              After a peak in 2021 driven by the e-commerce boom, funding contracted in 2023 during the broader market reset.
+              Investment rebounded in 2024-2025 with clear focus on AI-native platforms.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Market Omissions */}
+        <Card className="border-border/60">
+          <CardContent className="p-6">
+            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Critical Market Omissions
+            </h3>
+            <img
+              src="/charts/omitted_competitors.png"
+              alt="Major Omissions: Employee Scale Comparison"
+              className="w-full rounded-lg border border-border/30 mb-4"
+              loading="lazy"
+            />
+            <p className="text-xs text-muted-foreground mb-3">
+              Companies missing from initial market scans | Verified headcount data
+            </p>
+            <p className="text-sm text-foreground/80 leading-relaxed mb-4">
+              Initial market scans critically overlooked four major competitors who collectively represent over $600M in recent funding and ~5,800 employees.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {[
+                { name: "Assent Compliance", detail: "$501M funding, ~1,000 employees, $100M ARR" },
+                { name: "QIMA", detail: "4,000+ employees, 32% revenue CAGR" },
+                { name: "IntegrityNext", detail: "€100M funding, 200+ employees" },
+                { name: "Sedex", detail: "95,000+ members, 540,000 audits" },
+              ].map((item) => (
+                <Card key={item.name} className="border-border/30 bg-muted/20">
+                  <CardContent className="p-3">
+                    <p className="text-sm font-semibold text-foreground">{item.name}</p>
+                    <p className="text-xs text-muted-foreground">{item.detail}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Competitive Positioning Matrix */}
+        <Card className="border-border/60">
+          <CardContent className="p-6">
+            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <Radar className="h-5 w-5 text-primary" />
+              Competitive Positioning by Quadrant
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <h4 className="font-display font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <Badge variant="outline" className="bg-red-500/10 text-red-400 border-red-500/30 text-[10px]">Critical</Badge>
+                  Orchestrators
+                </h4>
+                <p className="text-xs text-muted-foreground mb-3">High depth, high network effects</p>
+                <div className="space-y-2">
+                  {orchestrators.map(c => (
+                    <div key={c.id} className="p-2 bg-muted/20 rounded text-sm">
+                      <span className="font-medium text-foreground">{c.name}</span>
+                      <span className="text-xs text-muted-foreground ml-2">{c.funding}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="font-display font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <Badge variant="outline" className="bg-yellow-500/10 text-yellow-400 border-yellow-500/30 text-[10px]">Moderate</Badge>
+                  Data Engines
+                </h4>
+                <p className="text-xs text-muted-foreground mb-3">Intelligence providers</p>
+                <div className="space-y-2">
+                  {dataEngines.map(c => (
+                    <div key={c.id} className="p-2 bg-muted/20 rounded text-sm">
+                      <span className="font-medium text-foreground">{c.name}</span>
+                      <span className="text-xs text-muted-foreground ml-2">{c.funding}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="font-display font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <Badge variant="outline" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30 text-[10px]">Focused</Badge>
+                  Niche Experts
+                </h4>
+                <p className="text-xs text-muted-foreground mb-3">Deep vertical solutions</p>
+                <div className="space-y-2">
+                  {nicheExperts.map(c => (
+                    <div key={c.id} className="p-2 bg-muted/20 rounded text-sm">
+                      <span className="font-medium text-foreground">{c.name}</span>
+                      <span className="text-xs text-muted-foreground ml-2">{c.funding}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Strategic Threat Assessment */}
+        <Card className="border-border/60">
+          <CardContent className="p-6">
+            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              Strategic Threat Assessment
+            </h3>
+            <div className="space-y-5">
+              {[
+                { label: "Structural", threats: structuralThreats, desc: "Platform-level disruption — could make per-test billing obsolete", color: "bg-red-500/10 border-red-500/20" },
+                { label: "Hybrid", threats: hybridThreats, desc: "Competing on both physical inspection AND digital platform", color: "bg-orange-500/10 border-orange-500/20" },
+                { label: "Network", threats: networkThreats, desc: "Utility status — deeply embedded in procurement workflows", color: "bg-purple-500/10 border-purple-500/20" },
+                { label: "Tactical", threats: tacticalThreats, desc: "Segment competition — potential acquisition targets", color: "bg-emerald-500/10 border-emerald-500/20" },
+              ].map(({ label, threats, desc, color }) => (
+                <div key={label}>
+                  <h4 className="font-display font-semibold text-foreground mb-1">
+                    {label} Threats ({threats.length})
+                  </h4>
+                  <p className="text-xs text-muted-foreground mb-2">{desc}</p>
+                  <div className="space-y-2">
+                    {threats.map(c => (
+                      <Card key={c.id} className={`border ${color}`}>
+                        <CardContent className="p-3">
+                          <p className="text-sm font-medium text-foreground">{c.name}</p>
+                          <p className="text-xs text-muted-foreground mt-1">{c.strategicPosition.slice(0, 150)}…</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </motion.div>
+  );
+}
+
 /* ─── Market Report Tab ─── */
 
 function MarketReportTab() {
@@ -1364,7 +1612,7 @@ function MarketReportTab() {
 
 /* ─── Page ─── */
 
-const ALL_TABS = ["landscape", "companies", "battlecards", "matrix", "compare", "report", "regulatory", "whitespace", "timeline"];
+const ALL_TABS = ["landscape", "companies", "analysis", "battlecards", "matrix", "compare", "report", "regulatory", "whitespace", "timeline"];
 
 const ComparePage = lazy(() => import("./Compare"));
 
@@ -1407,9 +1655,10 @@ export default function MarketIntelligencePage() {
       <section className="mx-auto max-w-7xl px-6 py-12">
         <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); trackSectionExplored(v); }}>
           <div className="flex justify-center mb-10 overflow-x-auto">
-            <TabsList className="grid grid-cols-5 md:grid-cols-9">
+            <TabsList className="grid grid-cols-5 md:grid-cols-10">
               <TabsTrigger value="landscape" className="gap-1.5 text-xs"><Radar className="h-3.5 w-3.5" /> Landscape</TabsTrigger>
               <TabsTrigger value="companies" className="gap-1.5 text-xs"><Database className="h-3.5 w-3.5" /> Companies</TabsTrigger>
+              <TabsTrigger value="analysis" className="gap-1.5 text-xs"><ArrowUpDown className="h-3.5 w-3.5" /> Analysis</TabsTrigger>
               <TabsTrigger value="battlecards" className="gap-1.5 text-xs"><Swords className="h-3.5 w-3.5" /> Battlecards</TabsTrigger>
               <TabsTrigger value="matrix" className="gap-1.5 text-xs"><Table2 className="h-3.5 w-3.5" /> AI Matrix</TabsTrigger>
               <TabsTrigger value="compare" className="gap-1.5 text-xs"><GitCompare className="h-3.5 w-3.5" /> Compare</TabsTrigger>
@@ -1494,6 +1743,11 @@ export default function MarketIntelligencePage() {
           {/* ── Companies ── */}
           <TabsContent value="companies">
             <CompanyDatabaseTab />
+          </TabsContent>
+
+          {/* ── Analysis ── */}
+          <TabsContent value="analysis">
+            <MarketAnalysisTab />
           </TabsContent>
 
           {/* ── Battlecards ── */}
