@@ -1,8 +1,8 @@
 export const APP_URLS: Record<string, string> = {
-  portal: "https://tht-carlos.lovable.app",
-  ai: "https://tht-ai-carlos.lovable.app",
-  blue: "https://tht-bs-carlos.lovable.app",
-  smart: "https://tht-smart-adv.lovable.app",
+  portal: "https://tht-carlos.dnaventures.es",
+  ai: "https://tht-ai-carlos.dnaventures.es",
+  blue: "https://tht-bs-carlos.dnaventures.es",
+  smart: "https://tht-smart-adv.dnaventures.es",
 };
 
 export const APPS = [
