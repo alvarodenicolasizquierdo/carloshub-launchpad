@@ -282,7 +282,7 @@ export default function Index() {
                 { vs: "vs. TradeBeyond", line: "They have workflow AI and compliance risk scoring. We go deeper — explainability, DPP export, downstream impact visualization, and scenario simulation they don't offer." },
                 { vs: "vs. Status Quo", line: "Spreadsheets don't predict. CARLOS does." },
               ].map((item) => (
-                <Card key={item.vs} className="border-border/30 bg-card/50">
+                <Card key={item.vs} className="border-border/30 bg-tht-charcoal/80">
                   <CardContent className="p-6 text-center">
                     <h3 className="font-display font-semibold text-primary mb-3">{item.vs}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed italic">"{item.line}"</p>
