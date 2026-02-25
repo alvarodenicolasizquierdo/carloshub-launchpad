@@ -832,7 +832,7 @@ function BattleCardComponent({ card }: { card: BattleCard }) {
   };
 
   return (
-    <div ref={ref}>
+    <div ref={ref} id={`battlecard-${card.id}`}>
       <AccordionItem value={card.id} className="border rounded-lg overflow-hidden mb-4">
         <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-muted/30">
           <div className="flex items-center gap-3 text-left">
@@ -1444,25 +1444,38 @@ export default function MarketIntelligencePage() {
                       <span className="absolute bottom-3 right-3 text-[10px] text-muted-foreground/50 uppercase tracking-wider">Operational / Field</span>
                     </div>
                     {/* Players */}
-                    {QUADRANT_PLAYERS.map((p, idx) => (
-                      <motion.div
-                        key={p.name}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 + idx * 0.06, type: "spring" }}
-                        className="absolute flex flex-col items-center -translate-x-1/2 translate-y-1/2"
-                        style={{ left: `${p.x}%`, bottom: `${p.y}%` }}
-                      >
-                        <div
-                          className={`${p.name === "CARLOS" ? "w-14 h-14" : "w-10 h-10"} rounded-full flex items-center justify-center text-white font-display font-bold shadow-lg border-2 border-white/20`}
-                          style={{ backgroundColor: p.color, fontSize: p.name === "CARLOS" ? 11 : 9 }}
+                    {QUADRANT_PLAYERS.map((p, idx) => {
+                      const battlecardId = BATTLECARDS.find((b) => b.name.toLowerCase() === p.name.toLowerCase())?.id;
+                      const isClickable = !!battlecardId;
+                      return (
+                        <motion.div
+                          key={p.name}
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ delay: 0.2 + idx * 0.06, type: "spring" }}
+                          className={`absolute flex flex-col items-center -translate-x-1/2 translate-y-1/2 ${isClickable ? "cursor-pointer group" : ""}`}
+                          style={{ left: `${p.x}%`, bottom: `${p.y}%` }}
+                          onClick={() => {
+                            if (battlecardId) {
+                              setActiveTab("battlecards");
+                              setTimeout(() => {
+                                const el = document.getElementById(`battlecard-${battlecardId}`);
+                                el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                              }, 300);
+                            }
+                          }}
                         >
-                          {p.name.slice(0, 3).toUpperCase()}
-                        </div>
-                        <span className={`mt-1 font-display font-semibold text-foreground whitespace-nowrap ${p.name === "CARLOS" ? "text-xs" : "text-[10px]"}`}>{p.name}</span>
-                        <span className="text-[9px] text-muted-foreground whitespace-nowrap">{p.label}</span>
-                      </motion.div>
-                    ))}
+                          <div
+                            className={`${p.name === "CARLOS" ? "w-14 h-14" : "w-10 h-10"} rounded-full flex items-center justify-center text-white font-display font-bold shadow-lg border-2 border-white/20 transition-transform ${isClickable ? "group-hover:scale-110 group-hover:shadow-xl" : ""}`}
+                            style={{ backgroundColor: p.color, fontSize: p.name === "CARLOS" ? 11 : 9 }}
+                          >
+                            {p.name.slice(0, 3).toUpperCase()}
+                          </div>
+                          <span className={`mt-1 font-display font-semibold text-foreground whitespace-nowrap ${p.name === "CARLOS" ? "text-xs" : "text-[10px]"} ${isClickable ? "group-hover:text-primary transition-colors" : ""}`}>{p.name}</span>
+                          <span className="text-[9px] text-muted-foreground whitespace-nowrap">{p.label}</span>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                   {/* Callout */}
                   <Card className="mt-12 border-primary/30 bg-primary/5">
