@@ -132,7 +132,7 @@ export function SidebarContent({ collapsed, setCollapsed, onNavigate }: { collap
 
       {/* Footer Actions */}
       <div className="p-2 border-t border-sidebar-border space-y-1">
-        {!collapsed && !isDemoMode && (
+        {!collapsed && (
           <div className="px-2 py-2">
              <DemoModeToggle />
           </div>
