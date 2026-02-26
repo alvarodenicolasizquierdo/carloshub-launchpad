@@ -30,7 +30,7 @@ const App = () => {
     initClarityTracking();
   }, []);
 
-  return (
+  return (<ThemeProvider defaultTheme="dark">
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -71,6 +71,7 @@ const App = () => {
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+</ThemeProvider>
   );
 };
 
