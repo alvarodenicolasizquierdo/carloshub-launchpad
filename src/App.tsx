@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
+import { ThemeProvider } from "next-themes";
 import { initClarityTracking } from "@/utils/clarityTracking";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
