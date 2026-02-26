@@ -43,25 +43,17 @@ export function DemoModeProvider({ children }: { children: ReactNode }) {
     }
   }, [isDemoMode, location.pathname, navigate]);
 
-  // Block internal keyboard shortcuts in demo mode
+  // Ctrl+Shift+D — secret exit from demo mode
   useEffect(() => {
-    if (!isDemoMode) return;
-
     const handler = (e: KeyboardEvent) => {
-      const combo = [
-        e.ctrlKey && "ctrl",
-        e.shiftKey && "shift",
-        e.altKey && "alt",
-        e.key.toLowerCase(),
-      ]
-        .filter(Boolean)
-        .join("+");
-
-      const BLOCKED = ["ctrl+shift+d", "ctrl+shift+i", "ctrl+shift+a"];
-
-      if (BLOCKED.includes(combo)) {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "d") {
         e.preventDefault();
         e.stopPropagation();
+        if (isDemoMode) {
+          setIsDemoMode(false);
+          sessionStorage.removeItem("carlos_demo_mode");
+          toast({ title: "Demo mode off", description: "Internal view restored" });
+        }
       }
     };
 
