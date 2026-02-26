@@ -10,7 +10,7 @@ interface DemoModeContextType {
 
 const DemoModeContext = createContext<DemoModeContextType | null>(null);
 
-const DEMO_BLOCKED_ROUTES = ["/settings", "/feedback", "/competitive"];
+const DEMO_BLOCKED_ROUTES = ["/settings", "/feedback"];
 
 export function DemoModeProvider({ children }: { children: ReactNode }) {
   const [isDemoMode, setIsDemoMode] = useState(

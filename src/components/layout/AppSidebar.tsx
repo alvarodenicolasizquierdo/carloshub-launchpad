@@ -38,8 +38,8 @@ const NAV_GROUPS = [
   {
     title: "Intelligence",
     items: [
-      { label: "Market Intel", icon: Radar, path: "/competitive", demoVisible: false },
-      { label: "Digital Shift", icon: Radar, path: "/digital-shift", demoVisible: false },
+      { label: "Market Intel", icon: Radar, path: "/competitive", demoVisible: true },
+      { label: "Digital Shift", icon: Radar, path: "/digital-shift", demoVisible: true },
     ],
   },
   {
