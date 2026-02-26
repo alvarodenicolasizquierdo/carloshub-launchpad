@@ -1352,42 +1352,6 @@ function MarketAnalysisTab() {
           </CardContent>
         </Card>
 
-        {/* Market Omissions */}
-        <Card className="border-border/60">
-          <CardContent className="p-6">
-            <h3 className="font-display text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-destructive" />
-              Critical Market Omissions
-            </h3>
-            <img
-              src="/charts/omitted_competitors.png"
-              alt="Major Omissions: Employee Scale Comparison"
-              className="w-full rounded-lg border border-border/30 mb-4"
-              loading="lazy"
-            />
-            <p className="text-xs text-muted-foreground mb-3">
-              Companies missing from initial market scans | Verified headcount data
-            </p>
-            <p className="text-sm text-foreground/80 leading-relaxed mb-4">
-              Initial market scans critically overlooked four major competitors who collectively represent over $600M in recent funding and ~5,800 employees.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {[
-                { name: "Assent Compliance", detail: "$501M funding, ~1,000 employees, $100M ARR" },
-                { name: "QIMA", detail: "4,000+ employees, 32% revenue CAGR" },
-                { name: "IntegrityNext", detail: "€100M funding, 200+ employees" },
-                { name: "Sedex", detail: "95,000+ members, 540,000 audits" },
-              ].map((item) => (
-                <Card key={item.name} className="border-border/30 bg-muted/20">
-                  <CardContent className="p-3">
-                    <p className="text-sm font-semibold text-foreground">{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{item.detail}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Competitive Positioning Matrix */}
         <Card className="border-border/60">
