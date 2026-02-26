@@ -276,26 +276,7 @@ const DigitalShiftPage = () => {
           ))}
         </div>
 
-        {/* Confidence Levels */}
-        <Card className="mt-10 border-primary/20">
-          <CardContent className="p-6">
-            <h3 className="font-display font-semibold text-foreground mb-3">Confidence Levels on 5 Key Predictions</h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs">
-              {[
-                { claim: "Structural shift thesis", level: "HIGH", color: "text-accent-green" },
-                { claim: "EU regulatory expansion", level: "HIGH", color: "text-accent-green" },
-                { claim: "US regulatory continuity", level: "LOW", color: "text-destructive" },
-                { claim: "Premium willingness-to-pay", level: "MED", color: "text-accent-orange" },
-                { claim: "DPP standard interop", level: "MED", color: "text-accent-orange" },
-              ].map(c => (
-                <div key={c.claim} className="bg-muted/50 rounded-lg p-3 text-center">
-                  <p className={`font-bold ${c.color} mb-1`}>{c.level}</p>
-                  <p className="text-muted-foreground">{c.claim}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+
       </section>
 
       {/* ============ 6 DRIVERS ============ */}
