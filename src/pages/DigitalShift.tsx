@@ -71,13 +71,22 @@ const FUNDING_TABLE = [
 ];
 
 const GROWTH_DATA = [
-  { name: "EcoVadis", value: 735.8 },
-  { name: "Altana AI", value: 622 },
-  { name: "Assent", value: 501.6 },
-  { name: "IntegrityNext", value: 100 },
-  { name: "Prewave", value: 98 },
-  { name: "Inspectorio", value: 64.9 },
-  { name: "QIMA", value: 75 },
+  { name: "CARLOS", funding: 0, score: 14, growth: "N/A", scale: "847 ML features", type: "CARLOS" },
+  { name: "EcoVadis", funding: 735.8, score: 0, growth: "~30% YoY", scale: "150K+ companies", type: "Funded" },
+  { name: "Altana AI", funding: 622, score: 0, growth: "~60% YoY", scale: "$1B unicorn", type: "Funded" },
+  { name: "Assent", funding: 501.6, score: 0, growth: "~40% YoY", scale: "$1.3B valuation", type: "Funded" },
+  { name: "IntegrityNext", funding: 100, score: 0, growth: "N/A", scale: "1M suppliers", type: "Funded" },
+  { name: "Prewave", funding: 98, score: 0, growth: "~50% YoY", scale: "250K+ suppliers", type: "Funded" },
+  { name: "QIMA", funding: 75, score: 3.5, growth: "32% CAGR", scale: "30K+ clients", type: "Funded" },
+  { name: "Inspectorio", funding: 64.9, score: 9, growth: "~45% YoY", scale: "$340B customer rev", type: "Direct" },
+  { name: "TradeBeyond", funding: 0, score: 5, growth: "~15% YoY", scale: "50K+ partners", type: "Direct" },
+];
+
+const FEATURE_SCORE_DATA = [
+  { name: "CARLOS", score: 14, fill: "hsl(var(--primary))" },
+  { name: "Inspectorio", score: 9, fill: "hsl(var(--accent-blue))" },
+  { name: "TradeBeyond", score: 5, fill: "hsl(var(--accent-purple))" },
+  { name: "QIMA", score: 3.5, fill: "hsl(var(--accent-orange))" },
 ];
 
 type Company = {
@@ -374,14 +383,14 @@ const DigitalShiftPage = () => {
           <h2 className="font-display text-2xl font-bold text-foreground mb-1">Competitive Investment</h2>
           <p className="text-sm text-muted-foreground mb-8">$2B+ is flooding into platforms that compete with us. Verified from Crunchbase, CB Insights, and PitchBook (Feb 2026).</p>
 
-          {/* Revenue Growth Velocity Chart */}
+          {/* Revenue Growth Velocity Chart — Funding */}
           <Card className="mb-8">
             <CardContent className="p-6">
               <h3 className="font-display font-semibold text-foreground mb-1">Revenue Growth Velocity: Competitor Funding ($M)</h3>
-              <p className="text-xs text-muted-foreground mb-4">These are not startups — they are scaled, well-funded competitors reshaping the TIC landscape.</p>
-              <div className="w-full h-[350px]">
+              <p className="text-xs text-muted-foreground mb-4">These are not startups — they are scaled, well-funded competitors reshaping the TIC landscape. 24 cited sources.</p>
+              <div className="w-full h-[400px]">
                 <ResponsiveContainer>
-                  <BarChart data={GROWTH_DATA} layout="vertical" margin={{ left: 90, right: 30, top: 5, bottom: 5 }}>
+                  <BarChart data={GROWTH_DATA.filter(d => d.funding > 0)} layout="vertical" margin={{ left: 90, right: 30, top: 5, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                     <XAxis type="number" domain={[0, 800]} tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} tickFormatter={(v) => `$${v}M`} />
                     <YAxis dataKey="name" type="category" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} width={85} />
@@ -389,10 +398,39 @@ const DigitalShiftPage = () => {
                       contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 12 }}
                       formatter={(val: number) => [`$${val}M`, "Total Funding"]}
                     />
-                    <Bar dataKey="value" fill="hsl(var(--primary))" name="Funding" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="funding" fill="hsl(var(--primary))" name="Funding" radius={[0, 4, 4, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Feature Score Comparison */}
+          <Card className="mb-8">
+            <CardContent className="p-6">
+              <h3 className="font-display font-semibold text-foreground mb-1">AI Feature Score: CARLOS vs Direct Competitors (out of 16)</h3>
+              <p className="text-xs text-muted-foreground mb-4">Scoring: Full capability = 1pt, Partial = 0.5pt, Not present = 0pt. Based on 16 AI features assessed Feb 2026.</p>
+              <div className="w-full h-[220px]">
+                <ResponsiveContainer>
+                  <BarChart data={FEATURE_SCORE_DATA} layout="vertical" margin={{ left: 90, right: 30, top: 5, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis type="number" domain={[0, 16]} tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                    <YAxis dataKey="name" type="category" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} width={85} />
+                    <Tooltip
+                      contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8, fontSize: 12 }}
+                      formatter={(val: number) => [`${val} / 16`, "Feature Score"]}
+                    />
+                    <Bar dataKey="score" name="Score" radius={[0, 4, 4, 0]}>
+                      {FEATURE_SCORE_DATA.map((entry) => (
+                        <Cell key={entry.name} fill={entry.fill} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <p className="text-xs text-muted-foreground mt-3 italic">
+                A 5-point lead (14 vs 9) is dominant and defensible with any buyer who researches for 30 minutes.
+              </p>
             </CardContent>
           </Card>
 
