@@ -1,37 +1,24 @@
 
 
-# Update Custom Domain Support for dnaventures.es
+## Add "The Trust Shift" Strategy Deck to Collateral
 
-## What's changing
+**What**: Add the uploaded PDF ("TIC Strategy Board Deck — The Trust Shift") as a new downloadable resource on the Collateral page.
 
-The Hub currently only trusts URLs ending in `.lovable.app` or `.lovable.dev`. Since you're setting up custom domains on `dnaventures.es`, we need two changes:
+**Changes**:
 
-1. **Add `.dnaventures.es` to the trusted domains whitelist** so the Settings URL override feature accepts your new custom domains.
-2. **Update the test file** to cover the new trusted domain.
+### 1. Copy the PDF to the project
+- Copy `user-uploads://TIC-Strategy-Board-Deck_-_THE_TRUST_SHIFT.pdf` to `public/collateral/TIC-Strategy-Board-Deck_-_THE_TRUST_SHIFT.pdf`
 
-The default `APP_URLS` will stay as the Lovable URLs (they'll keep working as fallbacks). Once DNS propagates, you can enter the new URLs in **Settings** and they'll be accepted by the validator.
+### 2. Update `src/pages/Collateral.tsx`
+- Add a new entry to the `RESOURCES` array:
+  - **Title**: "The Trust Shift — Board Strategy Deck"
+  - **Format**: PDF
+  - **Icon**: `Presentation` (already imported)
+  - **Audience**: "Board / Executive"
+  - **Status**: available
+  - **isNew**: true
+  - **Description**: "From Commodity Testing to the Compliance Operating System — 84-source strategic analysis of the global TIC industry covering market evolution, regulatory triggers, competitive landscape, and the shift from labs to digital compliance platforms. Feb 2026."
+  - **downloadUrl**: `/collateral/TIC-Strategy-Board-Deck_-_THE_TRUST_SHIFT.pdf`
 
-## Summary of expected custom domains
-
-| App | Current (stays as default) | New custom domain |
-|---|---|---|
-| Hub | carloshub-launchpad.lovable.app | carloshub-launchpad.dnaventures.es |
-| Portal | sgs-carlos.lovable.app | sgs-carlos.dnaventures.es |
-| AI | sgs-ai-carlos.lovable.app | sgs-ai-carlos.dnaventures.es |
-| BLUE | sgs-bs-carlos.lovable.app | sgs-bs-carlos.dnaventures.es |
-| SMART | sgs-smart-adv.lovable.app | sgs-smart-adv.dnaventures.es |
-
-## Technical details
-
-### File 1: `src/config/constants.ts`
-- Line 193: Add `".dnaventures.es"` to the `ALLOWED_DOMAINS` array
-
-### File 2: `src/config/constants.test.ts`
-- Add a test case confirming that a `.dnaventures.es` override is accepted
-- Example: override portal to `https://sgs-carlos.dnaventures.es` and verify it's returned
-
-### No other changes
-- `APP_URLS` defaults stay as-is (Lovable URLs remain the fallback)
-- No UI, layout, or functional changes
-- The Hub's own URL (`carloshub-launchpad.lovable.app`) is unaffected by this code change -- that's configured in Lovable project Settings separately
+No other files need to change.
 
